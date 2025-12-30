@@ -1,11 +1,11 @@
-import { NestFactory } from '@nestjs/core'
-import { AppModule } from '../src/app.module'
+const { NestFactory } = require('@nestjs/core')
 
 let app
 
-export default async function handler(req: any, res: any) {
+module.exports = async (req, res) => {
   try {
     if (!app) {
+      const { AppModule } = require('../dist/app.module')
       app = await NestFactory.create(AppModule)
       app.enableCors()
       await app.init()
