@@ -16,9 +16,16 @@ async function createApp() {
     logger: false,
   })
   
+  // Настройка CORS для работы с фронтендом на Vercel
   app.enableCors({
-    origin: true,
+    origin: [
+      process.env.FRONTEND_URL,
+      /\.vercel\.app$/,
+      /\.vercel\.dev$/
+    ].filter(Boolean),
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   })
   
   await app.init()
