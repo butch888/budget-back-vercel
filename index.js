@@ -1,0 +1,15 @@
+const { NestFactory } = require('@nestjs/core')
+const { AppModule } = require('./dist/app.module')
+
+let app
+
+module.exports = async (req, res) => {
+  if (!app) {
+    app = await NestFactory.create(AppModule)
+    app.setGlobalPrefix('api')
+    app.enableCors()
+    await app.init()
+  }
+  
+  return app.getHttpAdapter().getInstance()(req, res)
+}
