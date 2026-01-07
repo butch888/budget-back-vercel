@@ -21,9 +21,7 @@ import { AuthModule } from './auth/auth.module'
         url: configService.get('DATABASE_URL'),
         synchronize: true,
         entities: [__dirname + '/**/*.entity{.js, .ts}'],
-        ssl: {
-          rejectUnauthorized: false,
-        },
+        ssl: false,
       }),
       inject: [ConfigService],
     }),
